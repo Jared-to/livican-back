@@ -79,17 +79,18 @@ export class ExcelService {
       let nextIncrement = productosExistentes.length + 1;
 
       for (const [index, row] of jsonData.entries()) {
+
         try {
           const categoriaNombre = row['Categoria'].toLowerCase().trim();
           const nombre = row['Producto'].toLowerCase().trim();
           const cantidad = Number(row['Cantidad']);
           const unidadMedida = row['unidad_medida'];
+          const marca = row['Marca'].toLowerCase();
+          const tallas = row['Tallas'];
+          const modelo_corte = row['modelo_corte'];
           const precioMinimo = Number(row['Precio minimo de Venta']);
           const precioVenta = Number(row['Precio']);
 
-          if (!categoriaNombre || isNaN(cantidad) || isNaN(precioVenta)) {
-            throw new Error(`Fila inválida en índice ${index}: Datos faltantes o incorrectos.`);
-          }
 
           let categoria = categoriasMap.get(categoriaNombre);
           if (!categoria) {
@@ -102,6 +103,7 @@ export class ExcelService {
           }
 
           let producto = productosMap.get(nombre);
+          console.log(producto);
 
 
           if (!producto) {
@@ -113,6 +115,9 @@ export class ExcelService {
               precio_venta: precioVenta.toFixed(2),
               categoriaId: categoria.id,
               stock: cantidad.toFixed(2),
+              marca,
+              modelo_corte,
+              tallas
             }, queryRunner);
             console.log(producto);
 
@@ -132,6 +137,8 @@ export class ExcelService {
         errores,
       };
     } catch (error) {
+      console.log(error);
+
       await queryRunner.rollbackTransaction();
       throw new Error(`Error al procesar el archivo: ${error.message}`);
     } finally {

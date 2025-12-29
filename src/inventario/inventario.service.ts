@@ -164,8 +164,8 @@ export class InventarioService {
       inventario.stock = inventario.stock + parseFloat(cantidad);
 
     }
-    console.log('inven',inventario);
-    
+    console.log('inven', inventario);
+
     // Guardar en la base de datos
     await queryRunner.manager.save(Inventario, inventario);
 
@@ -211,6 +211,8 @@ export class InventarioService {
         'producto.nombre AS producto_nombre',
         'producto.unidad_medida AS unidad_medida',
         'producto.marca AS marca',
+        'producto.tallas AS tallas',
+        'producto.modelo_corte AS modelo_corte',
         'producto.precio_venta AS precio_venta',
         'producto.imagen AS imagen',
         'producto.codigo AS codigo',
@@ -234,6 +236,8 @@ export class InventarioService {
         'producto.nombre AS producto_nombre',
         'producto.unidad_medida AS unidad_medida',
         'producto.marca AS marca',
+        'producto.tallas AS tallas',
+        'producto.modelo_corte AS modelo_corte',
         'producto.precio_venta AS precio_venta',
         'producto.imagen AS imagen',
         'producto.codigo AS codigo',

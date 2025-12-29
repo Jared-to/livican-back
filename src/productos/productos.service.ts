@@ -162,6 +162,8 @@ export class ProductosService {
         'producto.precio_min_venta',
         'producto.imagen',
         'producto.marca',
+        'producto.tallas',
+        'producto.modelo_corte',
         'producto.unidad_medida',
         'categoria',
       ])

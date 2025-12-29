@@ -6,11 +6,11 @@ services:
     image: postgres:14.3
     restart: always
     ports:
-      - "5032:5432"
+      - "5132:5432"
     environment:
       POSTGRES_PASSWORD: ${DB_PASSWORD}
       POSTGRES_DB: ${DB_NAME}
-    container_name: carnicera-chocas
+    container_name: livican
     volumes:
       - ./postgres:/var/lib/postgresql/data
     networks:

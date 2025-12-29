@@ -12,6 +12,14 @@ export class CreateProductoDto {
 
   @IsOptional()
   @IsString()
+  tallas?: string;
+
+  @IsOptional()
+  @IsString()
+  modelo_corte?: string;
+
+  @IsOptional()
+  @IsString()
   codigo?: string;
 
   @IsString()

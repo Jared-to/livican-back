@@ -23,9 +23,9 @@ async function bootstrap() {
   );
   // Habilitar CORS
   app.enableCors({
-    origin: 'http://localhost:5173', // Permite solo este origen
-    methods: 'GET,HEAD,PUT,PATCH,POST,DELETE,OPTIONS',
-    credentials: true,
+    // origin: 'http://localhost:5173', // Permite solo este origen
+    // methods: 'GET,HEAD,PUT,PATCH,POST,DELETE,OPTIONS',
+    // credentials: true,
   });
 
   app.useGlobalPipes(

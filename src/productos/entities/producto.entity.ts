@@ -13,14 +13,20 @@ export class Producto {
   @Column({ type: 'text', unique: true, nullable: true })
   codigo: string;
 
-  @Column('text', {nullable: true})
+  @Column('text', { nullable: true })
   nombre: string;
 
 
-  @Column('text', {nullable: true})
+  @Column('text', { nullable: true })
   marca: string;
 
-  @Column('text', {nullable: true})
+  @Column('text', { nullable: true })
+  tallas: string;
+
+  @Column('text', { nullable: true })
+  modelo_corte: string;
+  
+  @Column('text', { nullable: true })
   unidad_medida: string;
 
   @Column('float', { nullable: true })
