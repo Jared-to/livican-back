@@ -7,6 +7,7 @@ import { AuthModule } from 'src/auth/auth.module';
 import { CategoriaGastosModule } from 'src/categoria-gastos/categoria-gastos.module';
 import { NotificacionesModule } from 'src/notificaciones/notificaciones.module';
 import { GastoListener } from './listener/gasto.listener';
+import { CajasModule } from 'src/cajas/cajas.module';
 
 @Module({
   imports: [
@@ -14,6 +15,7 @@ import { GastoListener } from './listener/gasto.listener';
     AuthModule,
     CategoriaGastosModule,
     NotificacionesModule,
+    CajasModule,
   ],
   controllers: [GastosController],
   providers: [GastosService,GastoListener],

@@ -2,6 +2,7 @@ import { Column, Entity, JoinColumn, ManyToOne, OneToMany, PrimaryGeneratedColum
 import { DetalleVenta } from "./detalle-venta.entity";
 import { Cliente } from "src/clientes/entities/cliente.entity";
 import { User } from "src/auth/entities/user.entity";
+import { Caja } from "src/cajas/entities/caja.entity";
 
 @Entity('ventas')
 export class Venta {
@@ -65,6 +66,10 @@ export class Venta {
   })
   detalles: DetalleVenta[];
 
-
+  // Relación muchos a uno
+  @ManyToOne(() => Caja, (caja) => caja.ventas, {
+    nullable: true, // Hace obligatorio que cada venta tenga una caja
+  })
+  caja: Caja;
 
 }

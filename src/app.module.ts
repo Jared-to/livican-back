@@ -19,6 +19,7 @@ import { HomeModule } from './home/home.module';
 import { NotificacionesModule } from './notificaciones/notificaciones.module';
 import { EventEmitterModule } from '@nestjs/event-emitter';
 import { ControlModule } from './control/control.module';
+import { CajasModule } from './cajas/cajas.module';
 
 @Module({
   imports: [
@@ -55,6 +56,7 @@ import { ControlModule } from './control/control.module';
     HomeModule,
     NotificacionesModule,
     ControlModule,
+    CajasModule,
     EventEmitterModule.forRoot(),
 
   ],

@@ -46,4 +46,14 @@ export class ReportesController {
     pdfDoc.end();
   }
 
+  @Get('caja/:id')
+  async obtenerPdfCaja(@Param('id') id: string, @Res() response: Response) {
+    const pdfDoc = await this.reportesService.obtenerPdfCaja(id);
+
+    response.setHeader('Content-Type', 'application/pdf');
+    response.setHeader('Content-Disposition', `attachment; filename="Reporte-Caja-${id}.pdf"`);
+    pdfDoc.info.Title = `Reporte Caja ${id}`;
+    pdfDoc.pipe(response);
+    pdfDoc.end();
+  }
 }

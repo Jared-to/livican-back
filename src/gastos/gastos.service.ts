@@ -9,6 +9,7 @@ import { CategoriaGasto } from 'src/categoria-gastos/entities/categoria-gasto.en
 import * as moment from 'moment-timezone';
 import { NotificacionesService } from 'src/notificaciones/notificaciones.service';
 import { EventEmitter2 } from '@nestjs/event-emitter';
+import { CajasService } from 'src/cajas/cajas.service';
 
 @Injectable()
 export class GastosService {
@@ -21,10 +22,12 @@ export class GastosService {
     private readonly categoriaRepository: Repository<CategoriaGasto>,
     private readonly notificationsService: NotificacionesService,
     private readonly eventEmitter: EventEmitter2,
+    private readonly cajasService: CajasService,
+
   ) { }
 
   async create(createGastoDto: CreateGastoDto): Promise<Gasto> {
-    const { usuarioId, categoriaId, fecha, ...rest } = createGastoDto;
+    const { usuarioId, categoriaId, fecha, cajaId, ...rest } = createGastoDto;
 
     const usuario = await this.userRepository.findOne({ where: { id: usuarioId } });
     if (!usuario) {
@@ -35,8 +38,15 @@ export class GastosService {
     if (!categoria) {
       throw new NotFoundException(`Categoría con ID ${categoriaId} no encontrada.`);
     }
+
+    const caja = await this.cajasService.findOne(cajaId);
+
+    if (!caja) {
+      throw new Error(' Caja  no encontrados.');
+    }
     const gasto = this.gastoRepository.create({
       ...rest,
+      caja,
       usuario,
       categoria,
       fecha: moment(fecha).tz("America/La_Paz").toDate(),
@@ -101,7 +111,7 @@ Sistema: *https://livican.comercio.bo*
     if (fechaInicio === 'xx' && fechaFin === 'xx') {
       return this.gastoRepository.find({
         where: user.roles[0] === 'admin' ? {} : { usuario: { id: user.id } },
-        relations: ['usuario', 'categoria',],
+        relations: ['usuario', 'categoria', 'caja'],
       });
     }
 
@@ -128,14 +138,14 @@ Sistema: *https://livican.comercio.bo*
     }
     return this.gastoRepository.find({
       where: whereConditions,
-      relations: ['usuario', 'categoria'],
+      relations: ['usuario', 'categoria', 'caja'],
     });
   }
 
   async findOne(id: string): Promise<Gasto> {
     const gasto = await this.gastoRepository.findOne({
       where: { id },
-      relations: ['usuario', 'categoria'],
+      relations: ['usuario', 'categoria','caja'],
     });
 
     if (!gasto) {

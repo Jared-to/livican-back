@@ -30,6 +30,10 @@ export class CreateVentaDto {
   @IsString()
   vendedor: string;
 
+  @IsString()
+  cajaId: string;
+
+
 
   @IsString()
   fecha?: Date;

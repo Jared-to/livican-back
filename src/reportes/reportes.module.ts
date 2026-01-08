@@ -4,6 +4,7 @@ import { ReportesController } from './reportes.controller';
 import { PrinterService } from './helpers/printer.helper';
 import { VentasModule } from 'src/ventas/ventas.module';
 import { GastosModule } from 'src/gastos/gastos.module';
+import { CajasModule } from 'src/cajas/cajas.module';
 
 @Module({
   controllers: [ReportesController],
@@ -11,6 +12,7 @@ import { GastosModule } from 'src/gastos/gastos.module';
   imports:[
     VentasModule,
     GastosModule,
+    CajasModule
   ]
 })
 export class ReportesModule {}

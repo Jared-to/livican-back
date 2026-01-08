@@ -1,4 +1,5 @@
 import { User } from "src/auth/entities/user.entity";
+import { Caja } from "src/cajas/entities/caja.entity";
 import { CategoriaGasto } from "src/categoria-gastos/entities/categoria-gasto.entity";
 import { Column, Entity, JoinColumn, ManyToOne, PrimaryGeneratedColumn } from "typeorm";
 
@@ -43,4 +44,12 @@ export class Gasto {
     onDelete: 'CASCADE', // Elimina los gastos si se elimina la categoría
   })
   categoria: CategoriaGasto;
+
+  // Relación muchos a uno
+  @ManyToOne(() => Caja, (caja) => caja.gastos, {
+    nullable: true,
+    onDelete: 'CASCADE', // Elimina los gastos si se elimina la caja
+
+  })
+  caja: Caja;
 }

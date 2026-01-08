@@ -18,6 +18,11 @@ export class CreateGastoDto {
   @IsString()
   detalle: string;
 
+
+  @IsNotEmpty()
+  @IsString()
+  cajaId: string
+
   @IsOptional()
   @IsString()
   fecha?: Date;
@@ -25,7 +30,7 @@ export class CreateGastoDto {
   @IsNotEmpty()
   @IsNumber()
   monto: number;
-  
+
   @IsString()
   tipo_pago: string
 

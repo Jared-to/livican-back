@@ -49,6 +49,7 @@ export class VentasService {
       // Crear y guardar la venta
       const venta = queryRunner.manager.create(Venta, {
         ...ventaData,
+        caja: { id: ventaData.cajaId },
         fecha: moment(ventaData.fecha).tz("America/La_Paz").toDate(),
         vendedor: { id: ventaData.vendedor },
         nombreCliente: ventaData.cliente,
@@ -263,7 +264,7 @@ Sistema: *https://livican.comercio.bo*
     if (fechaInicio === 'xx' && fechaFin === 'xx') {
       return this.ventasRepository.find({
         where: user && !isAdmin ? { vendedor: { id: user.id } } : {},
-        relations: ['detalles', 'detalles.inventario', 'detalles.inventario.product', 'detalles.inventario.product.categoria', 'vendedor'],
+        relations: ['detalles', 'detalles.inventario', 'detalles.inventario.product', 'detalles.inventario.product.categoria', 'vendedor','caja'],
       });
     }
 
@@ -291,7 +292,7 @@ Sistema: *https://livican.comercio.bo*
 
     return this.ventasRepository.find({
       where: whereConditions,
-      relations: ['detalles', 'detalles.inventario', 'detalles.inventario.product', 'detalles.inventario.product.categoria', 'vendedor'],
+      relations: ['detalles', 'detalles.inventario', 'detalles.inventario.product', 'detalles.inventario.product.categoria', 'vendedor','caja'],
     });
   }
 
@@ -300,7 +301,7 @@ Sistema: *https://livican.comercio.bo*
   async findOne(id: string): Promise<Venta> {
     const venta = await this.ventasRepository.findOne({
       where: { id },
-      relations: ['detalles', 'detalles.inventario', 'detalles.inventario.product', 'detalles.inventario.product.categoria', 'vendedor'],
+      relations: ['detalles', 'detalles.inventario', 'detalles.inventario.product', 'detalles.inventario.product.categoria', 'vendedor','caja'],
     });
 
 
@@ -314,7 +315,7 @@ Sistema: *https://livican.comercio.bo*
   async findOneEdit(id: string): Promise<Venta> {
     const venta = await this.ventasRepository.findOne({
       where: { id },
-      relations: ['detalles', 'detalles.inventario', 'detalles.inventario.product', 'detalles.inventario.product.categoria', 'vendedor'],
+      relations: ['detalles', 'detalles.inventario', 'detalles.inventario.product', 'detalles.inventario.product.categoria', 'vendedor','caja'],
     });
 
     if (!venta) {
